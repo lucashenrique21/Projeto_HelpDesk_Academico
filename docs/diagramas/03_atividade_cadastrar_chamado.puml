@@ -1,0 +1,15 @@
+@startuml
+start
+:Selecionar "Novo chamado";
+:Preencher título, descrição,\nsolicitante, categoria e prioridade;
+:Enviar formulário;
+if (Campos obrigatórios válidos?) then (Sim)
+  :Criar registro de chamado;
+  :Salvar no banco de dados;
+  :Exibir confirmação;
+else (Não)
+  :Exibir mensagem de validação;
+  :Corrigir dados;
+endif
+stop
+@enduml

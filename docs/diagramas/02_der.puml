@@ -1,0 +1,28 @@
+@startuml
+hide circle
+skinparam linetype ortho
+entity "USUARIO" as Usuario {
+  * id : INTEGER <<PK>>
+  --
+  nome : VARCHAR(100)
+  email : VARCHAR(120) <<UNIQUE>>
+}
+entity "CATEGORIA" as Categoria {
+  * id : INTEGER <<PK>>
+  --
+  nome : VARCHAR(80) <<UNIQUE>>
+}
+entity "CHAMADO" as Chamado {
+  * id : INTEGER <<PK>>
+  --
+  titulo : VARCHAR(140)
+  descricao : TEXT
+  prioridade : VARCHAR(20)
+  status : VARCHAR(20)
+  criado_em : DATETIME
+  usuario_id : INTEGER <<FK>>
+  categoria_id : INTEGER <<FK>>
+}
+Usuario ||--o{ Chamado : solicita
+Categoria ||--o{ Chamado : classifica
+@enduml

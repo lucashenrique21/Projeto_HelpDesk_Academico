@@ -1,0 +1,23 @@
+@startuml
+class Usuario {
+  +id: int
+  +nome: str
+  +email: str
+}
+class Categoria {
+  +id: int
+  +nome: str
+}
+class Chamado {
+  +id: int
+  +titulo: str
+  +descricao: str
+  +prioridade: str
+  +status: str
+  +criado_em: datetime
+  +usuario_id: int
+  +categoria_id: int
+}
+Usuario "1" -- "0..*" Chamado : solicitante
+Categoria "1" -- "0..*" Chamado : categoria
+@enduml

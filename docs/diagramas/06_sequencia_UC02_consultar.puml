@@ -1,0 +1,12 @@
+@startuml
+actor Operador
+boundary "Página de chamados" as UI
+control "Rota Flask" as App
+database "SQLite" as DB
+Operador -> UI : Acessa página inicial
+UI -> App : GET /
+App -> DB : Consultar chamados e contadores
+DB --> App : Lista de resultados
+App --> UI : Renderizar template
+UI --> Operador : Exibir chamados
+@enduml

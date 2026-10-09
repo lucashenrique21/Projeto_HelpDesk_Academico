@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Chamados | HelpDesk{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div><h1 class="h3 mb-1">Gerenciamento de chamados</h1><p class="text-secondary mb-0">Acompanhe as solicitações de suporte.</p></div>
+  <a class="btn btn-primary" href="{{ url_for('novo_chamado') }}">+ Novo chamado</a>
+</div>
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3"><div class="card metric"><div class="card-body"><div class="text-secondary">Total</div><div class="metric-number">{{ total }}</div></div></div></div>
+  <div class="col-6 col-lg-3"><div class="card metric"><div class="card-body"><div class="text-secondary">Abertos</div><div class="metric-number">{{ abertos }}</div></div></div></div>
+  <div class="col-6 col-lg-3"><div class="card metric"><div class="card-body"><div class="text-secondary">Em andamento</div><div class="metric-number">{{ andamento }}</div></div></div></div>
+  <div class="col-6 col-lg-3"><div class="card metric"><div class="card-body"><div class="text-secondary">Resolvidos</div><div class="metric-number">{{ resolvidos }}</div></div></div></div>
+</div>
+<div class="card"><div class="table-responsive"><table class="table table-hover align-middle mb-0">
+<thead><tr><th>#</th><th>Chamado</th><th>Solicitante</th><th>Categoria</th><th>Prioridade</th><th>Status</th><th>Ações</th></tr></thead>
+<tbody>
+{% for c in chamados %}
+<tr>
+<td>{{ c.id }}</td><td><strong>{{ c.titulo }}</strong><div class="small text-secondary">{{ c.criado_em.strftime('%d/%m/%Y %H:%M') }}</div></td>
+<td>{{ c.solicitante.nome }}</td><td>{{ c.categoria.nome }}</td><td>{{ c.prioridade }}</td>
+<td><span class="badge text-bg-{% if c.status == 'Resolvido' %}success{% elif c.status == 'Em andamento' %}warning{% else %}primary{% endif %}">{{ c.status }}</span></td>
+<td class="text-nowrap"><a class="btn btn-sm btn-outline-primary" href="{{ url_for('editar_chamado', chamado_id=c.id) }}">Editar</a>
+<form class="d-inline" method="post" action="{{ url_for('excluir_chamado', chamado_id=c.id) }}" onsubmit="return confirm('Deseja excluir este chamado?')"><button class="btn btn-sm btn-outline-danger">Excluir</button></form></td>
+</tr>
+{% else %}<tr><td colspan="7" class="text-center text-secondary py-4">Nenhum chamado cadastrado.</td></tr>{% endfor %}
+</tbody></table></div></div>
+{% endblock %}

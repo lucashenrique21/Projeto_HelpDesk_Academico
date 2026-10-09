@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{% if chamado %}Editar{% else %}Novo{% endif %} chamado{% endblock %}
+{% block content %}
+<h1 class="h3 mb-4">{% if chamado %}Editar chamado #{{ chamado.id }}{% else %}Abrir chamado{% endif %}</h1>
+<form method="post" class="card card-body form-card">
+  <div class="mb-3"><label class="form-label">Título</label><input class="form-control" name="titulo" required maxlength="140" value="{{ chamado.titulo if chamado else '' }}"></div>
+  <div class="mb-3"><label class="form-label">Descrição</label><textarea class="form-control" name="descricao" rows="4" required>{{ chamado.descricao if chamado else '' }}</textarea></div>
+  <div class="row g-3">
+    <div class="col-md-6"><label class="form-label">Solicitante</label><select class="form-select" name="usuario_id" required>{% for u in usuarios %}<option value="{{ u.id }}" {% if chamado and chamado.usuario_id == u.id %}selected{% endif %}>{{ u.nome }} ({{ u.email }})</option>{% endfor %}</select></div>
+    <div class="col-md-6"><label class="form-label">Categoria</label><select class="form-select" name="categoria_id" required>{% for cat in categorias %}<option value="{{ cat.id }}" {% if chamado and chamado.categoria_id == cat.id %}selected{% endif %}>{{ cat.nome }}</option>{% endfor %}</select></div>
+    <div class="col-md-6"><label class="form-label">Prioridade</label><select class="form-select" name="prioridade">{% for p in ['Baixa','Média','Alta','Crítica'] %}<option {% if chamado and chamado.prioridade == p %}selected{% elif not chamado and p == 'Média' %}selected{% endif %}>{{ p }}</option>{% endfor %}</select></div>
+    <div class="col-md-6"><label class="form-label">Status</label><select class="form-select" name="status">{% for s in ['Aberto','Em andamento','Resolvido'] %}<option {% if chamado and chamado.status == s %}selected{% elif not chamado and s == 'Aberto' %}selected{% endif %}>{{ s }}</option>{% endfor %}</select></div>
+  </div>
+  <div class="mt-4 d-flex gap-2"><button class="btn btn-primary">Salvar</button><a class="btn btn-outline-secondary" href="{{ url_for('index') }}">Cancelar</a></div>
+</form>
+{% endblock %}

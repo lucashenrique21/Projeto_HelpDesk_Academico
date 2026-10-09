@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+actor "Solicitante/Operador" as Operador
+actor Administrador as Admin
+rectangle "HelpDesk Acadêmico" {
+  usecase "UC01 - Cadastrar chamado" as UC1
+  usecase "UC02 - Consultar chamados" as UC2
+  usecase "UC03 - Atualizar chamado" as UC3
+  usecase "UC04 - Excluir chamado" as UC4
+  usecase "UC05 - Gerenciar usuários\ne categorias" as UC5
+}
+Operador --> UC1
+Operador --> UC2
+Operador --> UC3
+Operador --> UC4
+Admin --> UC5
+@enduml

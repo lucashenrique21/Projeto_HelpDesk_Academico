@@ -1,0 +1,13 @@
+@startuml
+actor Operador
+boundary "Lista de chamados" as UI
+control "Rota Flask" as App
+database "SQLite" as DB
+Operador -> UI : Solicita exclusão
+UI -> Operador : Confirma ação
+Operador -> UI : Confirma
+UI -> App : POST /chamados/id/excluir
+App -> DB : DELETE chamado
+DB --> App : Confirma exclusão
+App --> UI : Redirecionar + mensagem
+@enduml

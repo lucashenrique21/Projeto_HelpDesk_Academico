@@ -1,0 +1,17 @@
+@startuml
+actor Administrador
+boundary "Página de cadastros" as UI
+control "Rota Flask" as App
+database "SQLite" as DB
+Administrador -> UI : Preenche usuário ou categoria
+UI -> App : POST /cadastros
+App -> App : Validar campos e duplicidade
+alt Dados válidos
+  App -> DB : INSERT usuário/categoria
+  DB --> App : Confirma gravação
+  App --> UI : Redirecionar + mensagem de sucesso
+else Dados inválidos
+  App --> UI : Exibir mensagem de erro
+end
+UI --> Administrador : Mostrar cadastros atualizados
+@enduml

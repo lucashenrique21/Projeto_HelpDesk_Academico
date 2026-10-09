@@ -1,0 +1,15 @@
+@startuml
+actor Operador
+boundary "Formulário Web" as UI
+control "Rota Flask" as App
+entity "Chamado" as Model
+database "SQLite" as DB
+Operador -> UI : Preenche dados
+UI -> App : POST /chamados/novo
+App -> App : Validar campos
+App -> Model : Construir chamado
+App -> DB : INSERT chamado
+DB --> App : Confirma gravação
+App --> UI : Redirecionar + mensagem
+UI --> Operador : Exibir lista atualizada
+@enduml
