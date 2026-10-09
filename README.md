@@ -40,21 +40,3 @@ Projeto acadêmico para demonstrar aplicação web, banco de dados relacional e 
 7. Abra `http://127.0.0.1:5000` no navegador.
 
 O banco `helpdesk.db` é criado automaticamente na primeira execução.
-
-## Publicar no GitHub
-Crie um repositório vazio no GitHub e execute dentro da pasta:
-```bash
-git init
-git add .
-git commit -m "Projeto inicial HelpDesk"
-git branch -M main
-git remote add origin https://github.com/SEU-USUARIO/NOME-DO-REPOSITORIO.git
-git push -u origin main
-```
-Depois, nas configurações do repositório, adicione o tutor e `fernandonakagawa-unifil` como colaboradores conforme as instruções da disciplina.
-
-## Observações acadêmicas
-- Substitua os dados da capa e os textos de documentação pelos dados reais do aluno/dupla.
-- Revise e teste o sistema antes de entregar.
-- Os usuários de exemplo são fictícios.
-- Para uso real, seriam necessários autenticação, autorização, proteção CSRF, validação mais completa e configuração segura.
